@@ -61,3 +61,40 @@ footer {
     text-align: center;
     padding: 10px;
 }
+@media (max-width: 768px) {
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filtros button {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    .info {
+        flex-direction: column;
+    }
+
+    .producto {
+        width: 90%;
+    }
+
+    .galeria {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .hero {
+        padding: 20px 10px;
+    }
+
+    iframe {
+        height: 250px;
+    }
+
+    footer {
+        font-size: 14px;
+    }
+}
