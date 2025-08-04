@@ -1,155 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Productos - Vivero La Gallina</title>
-    <link rel="stylesheet" href="estilos.css">
-    <style>
-        .filtros {
-            text-align: center;
-            margin: 20px;
-        }
-        .filtros button {
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s ease;
-        }
-        .filtros button:hover {
-            background-color: #1b5e20;
-        }
-
-        .galeria {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .producto {
-            background-color: #ffffff;
-            border: 1px solid #c8e6c9;
-            border-left: 5px solid #4caf50;
-            border-radius: 10px;
-            width: 250px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .producto img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .producto h4 {
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Productos - Vivero La Gallina</title>
+  <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <header>
-        <h1>🌿 Vivero Ecológico La Gallina</h1>
-        <nav>
-            <a href="index.html">Inicio</a>
-            <a href="productos.html">Productos</a>
-            <a href="nosotros.html">Nosotros</a>
-            <a href="contacto.html">Contacto</a>
-        </nav>
-    </header>
+  <header>
+    <h1>🌿 Vivero Ecológico La Gallina</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </header>
 
-    <main>
-        <section class="filtros">
-            <button onclick="filtrar('todos')">Todos</button>
-            <button onclick="filtrar('ornamental')">🌼 Ornamentales</button>
-            <button onclick="filtrar('frutal')">🍎 Frutales</button>
-            <button onclick="filtrar('forestal')">🌳 Forestales</button>
-            <button onclick="filtrar('cactus')">🌵 Cactus</button>
-            <button onclick="filtrar('otros')">🌿 Otros</button>
-        </section>
+  <main>
+    <section class="buscador">
+  <input type="text" id="inputBuscar" placeholder="Buscar planta por nombre..." oninput="buscarPlanta()">
+</section>
 
-        <section class="galeria">
-            <!-- Ornamental -->
-            <div class="producto ornamental">
-                <img src="img/ornamental1.jpg" alt="Helecho">
-                <h4>Helecho</h4>
-                <p>Ideal para sombra, muy resistente y decorativo.</p>
-            </div>
-            <div class="producto ornamental">
-                <img src="img/ornamental2.jpg" alt="Geranio">
-                <h4>Geranio</h4>
-                <p>Florido, colorido y perfecto para macetas.</p>
-            </div>
+    <section class="galeria" id="galeria">
+      <!-- Aquí van las tarjetas, se llenarán con JS -->
+    </section>
 
-            <!-- Frutal -->
-            <div class="producto frutal">
-                <img src="img/frutal1.jpg" alt="Naranjo">
-                <h4>Naranjo</h4>
-                <p>Árbol frutal que ofrece frutas dulces y nutritivas.</p>
-            </div>
-            <div class="producto frutal">
-                <img src="img/frutal2.jpg" alt="Papayo">
-                <h4>Papayo</h4>
-                <p>Rápido crecimiento y alto rendimiento.</p>
-            </div>
+    <section id="detalle" class="detalle oculto">
+      <button onclick="cerrarDetalle()">← Volver</button>
+      <h2 id="nombreComun"></h2>
+      <p id="descripcionDestacada"></p>
+      <h3>Taxonomía y hábitat</h3>
+      <ul id="taxonomia"></ul>
+    </section>
+  </main>
 
-            <!-- Forestal -->
-            <div class="producto forestal">
-                <img src="img/forestal1.jpg" alt="Caoba">
-                <h4>Caoba</h4>
-                <p>Especie de alto valor maderable y ecológico.</p>
-            </div>
-            <div class="producto forestal">
-                <img src="img/forestal2.jpg" alt="Cedro">
-                <h4>Cedro</h4>
-                <p>Árbol robusto, ideal para reforestación.</p>
-            </div>
+  <footer>
+    <p>&copy; 2025 La Gallina - Vivero ecológico</p>
+  </footer>
 
-            <!-- Cactus -->
-            <div class="producto cactus">
-                <img src="img/cactus1.jpg" alt="Cactus Bola de Oro">
-                <h4>Bola de Oro</h4>
-                <p>Resistente al calor, de bajo mantenimiento.</p>
-            </div>
-            <div class="producto cactus">
-                <img src="img/cactus2.jpg" alt="Nopal">
-                <h4>Nopal</h4>
-                <p>Cactus comestible y medicinal.</p>
-            </div>
-
-            <!-- Otros -->
-            <div class="producto otros">
-                <img src="img/otros1.jpg" alt="Romero">
-                <h4>Romero</h4>
-                <p>Aromática, ideal para cocinar o infusiones.</p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 La Gallina - Vivero ecológico</p>
-    </footer>
-
-    <script>
-        function filtrar(categoria) {
-            const productos = document.querySelectorAll('.producto');
-            productos.forEach(p => {
-                if (categoria === 'todos' || p.classList.contains(categoria)) {
-                    p.style.display = 'block';
-                } else {
-                    p.style.display = 'none';
-                }
-            });
-        }
-    </script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="jsproductos.js"></script>
 </body>
 </html>
